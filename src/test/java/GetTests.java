@@ -1,3 +1,5 @@
+import com.api.enums.Econfig;
+import com.api.utilities.ConfigReader;
 import io.restassured.response.Response;
 import static org.assertj.core.api.Assertions.*;
 import org.testng.annotations.Test;
@@ -8,10 +10,13 @@ public class GetTests {
     @Test
     public void getTest(){
         Response response = given()
-                .baseUri("http://localhost:3000/")
+                .baseUri(ConfigReader.getValue(Econfig.BASE_URI))
                 .get("/students");
 
        assertThat(response.statusCode())
                 .isEqualTo(200);
+       assertThat(response.jsonPath().getMap("$").size())
+               .isPositive()
+               .isGreaterThanOrEqualTo(7);
     }
 }
