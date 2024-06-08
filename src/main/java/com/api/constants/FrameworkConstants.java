@@ -16,5 +16,4 @@ public final class FrameworkConstants {
         return CONFIG_FILE_PATH;
     }
 
-
 }
