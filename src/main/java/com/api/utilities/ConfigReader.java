@@ -1,13 +1,15 @@
 package com.api.utilities;
 
 import com.api.constants.FrameworkConstants;
+import com.api.customexceptions.InValidPropertyKeyException;
 import com.api.enums.Econfig;
 import org.testng.annotations.Test;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Properties;
 
 @Test
@@ -15,17 +17,28 @@ public final class ConfigReader {
     private ConfigReader(){
 
     }
-    public static String getValue() throws IOException {
+    private static final Map<String,String> CONFIG = new HashMap<>();
+    private static final Properties PROPERTIES=new Properties();
 
-        try(FileInputStream fis =new FileInputStream(new File(FrameworkConstants.getInstance().getConfigFilePath()))){
-            Properties properties = new Properties();
-            properties.load(fis);
-            return properties.getProperty(String.valueOf(Econfig.BASE_URI));
+    static {
+        try(FileInputStream fis =new FileInputStream(FrameworkConstants.getInstance().getConfigFilePath())){
+
+            PROPERTIES.load(fis);
+            PROPERTIES.forEach((key, value) -> CONFIG.put(
+                    String.valueOf(key),
+                    String.valueOf(value)
+            ));
         }
         catch (IOException e){
-
+            System.exit(0);
         }
+    }
 
-
+    public static String getValue(Econfig key) {
+        String k = key.toString();
+        if(Objects.isNull(k)){
+            throw new InValidPropertyKeyException("Property Key"+ k +" is not found.Please verify config.properties file!");
+        }
+        return PROPERTIES.getProperty(k);
     }
 }
