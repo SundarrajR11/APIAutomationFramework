@@ -1,0 +1,24 @@
+{
+  "id": 123,
+  "firstName": "sundar",
+  "lastName": "rat",
+  "email": "sdsa@s.com",
+  "isPassed": false,
+  "marks": [
+    93,
+    94,
+    98,
+    99,
+    87
+  ],
+  "Addresses": [
+    {
+      "block": 111,
+      "street": "Alan Walker"
+    },
+    {
+      "block": 151,
+      "street": "Solo Walker"
+    }
+  ]
+}
