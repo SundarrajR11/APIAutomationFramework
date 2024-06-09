@@ -1,7 +1,10 @@
+import com.api.constants.FrameworkConstants;
 import com.api.requestbodiespojos.StudentsWithLombok;
 import com.api.requestbodiespojos.StudentsWithoutLombok;
 import com.api.requestbuilders.RequestDetailsBuilder;
 import static com.api.utilities.RandomProvider.*;
+
+import com.api.utilities.ApiUtils;
 import org.testng.annotations.Test;
 
 public class PostTests {
@@ -37,5 +40,17 @@ public class PostTests {
         RequestDetailsBuilder.postCalls()
                 .body(reqBody)
                 .post("/students");
+
     }
+    @Test
+    public void postCallWithExternalFile() {
+
+        RequestDetailsBuilder.postCalls()
+                .body(ApiUtils.readJsonReturnAsString(FrameworkConstants.getEXT_REQ_FILE_PATH()))
+                .post("/students");
+
+    }
+
+
+
 }
