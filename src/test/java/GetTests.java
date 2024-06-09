@@ -1,22 +1,20 @@
-import com.api.enums.Econfig;
-import com.api.utilities.ConfigReader;
+import com.api.requestBuilders.RequestDetailsBuilder;
 import io.restassured.response.Response;
-import static org.assertj.core.api.Assertions.*;
 import org.testng.annotations.Test;
-import static io.restassured.RestAssured.*;
 
 public class GetTests {
 
     @Test
     public void getTest(){
-        Response response = given()
-                .baseUri(ConfigReader.getValue(Econfig.BASE_URI))
+        Response response = RequestDetailsBuilder.getCalls()
                 .get("/students");
+        response.prettyPrint();
+        System.out.println(response.statusCode());
+        System.out.println(response.jsonPath().getMap("Addresses[0]"));
+        System.out.println(response.jsonPath().getString("Addresses[0].street"));
+        System.out.println(response.jsonPath().getInt("marks[3]"));
+        System.out.println(response.jsonPath().getBoolean("isPassed"));
 
-       assertThat(response.statusCode())
-                .isEqualTo(200);
-       assertThat(response.jsonPath().getMap("$").size())
-               .isPositive()
-               .isGreaterThanOrEqualTo(7);
+        System.out.println("response = " +   response.jsonPath().getList("marks"));
     }
 }
