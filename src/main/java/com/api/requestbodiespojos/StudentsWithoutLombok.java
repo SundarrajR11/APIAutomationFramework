@@ -1,23 +1,31 @@
-package com.api.requestBodiesPOJOs;
-
+package com.api.requestbodiespojos;
 
 import java.util.List;
 
-public class StudentsWithoutLombak {
+
+public class StudentsWithoutLombok {
 
 
     private int id;
+
     private String name;
     private boolean isPassed;
-    private List<Number> CGPA;
 
-    public StudentsWithoutLombak(int id, String name, boolean isPassed, List<Number> CGPA) {
+    private List<? extends Object> CGPA;
+
+    public StudentsWithoutLombok(int id, String name, boolean isPassed, List<? extends Object> CGPA) {
         this.id = id;
         this.name = name;
         this.isPassed = isPassed;
         this.CGPA = CGPA;
     }
-    private StudentsWithoutLombak(){}
+
+    private StudentsWithoutLombok() {
+    }
+
+    public boolean isPassed() {
+        return isPassed;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -31,33 +39,51 @@ public class StudentsWithoutLombak {
         this.isPassed = passed;
     }
 
-    public void setCGPA(List<Number> CGPA) {
+    public void setCGPA(List<? extends Object> CGPA) {
         this.CGPA = CGPA;
     }
-    public  StudentsWithoutLombak builder1(){
-        return new StudentsWithoutLombak();
+
+    public StudentsWithoutLombok builder1() {
+        return new StudentsWithoutLombok();
     }
 
-    public static StudentsInner builder(){
+    public static StudentsInner builder() {
         return new StudentsInner();
     }
 
-    public static class StudentsInner{
+    @SuppressWarnings("umchecked")
+    public int getId() {
+        return this.id;
+    }
+
+    @SuppressWarnings("umchecked")
+    public String getName() {
+        return this.name;
+    }
+
+    @SuppressWarnings("umchecked")
+    public List<?> getCGPA() {
+        return this.CGPA;
+    }
+
+    public static class StudentsInner {
         private int id;
 
         private String name;
         private boolean isPassed;
 
-        private List<Number> CGPA;
+        private List<? extends Object> CGPA;
 
-        StudentsInner(){}
+        StudentsInner() {
+        }
 
         // Sugarcoated methods
 
-        public StudentsInner and(){
+        public StudentsInner and() {
             return this;
         }
-        public StudentsInner with(){
+
+        public StudentsInner with() {
             return this;
         }
 
@@ -76,10 +102,11 @@ public class StudentsWithoutLombak {
             return this;
         }
 
-        public StudentsInner setCGPA(List<Number> CGPA) {
+        public StudentsInner setCGPA(List<? extends Object> CGPA) {
             this.CGPA = CGPA;
             return this;
         }
+
         public int getId() {
             return id;
         }
@@ -92,12 +119,12 @@ public class StudentsWithoutLombak {
             return isPassed;
         }
 
-        public List<Number> getCGPA() {
+        public List<? extends Object> getCGPA() {
             return CGPA;
         }
 
-        public StudentsWithoutLombak build(){
-            return new StudentsWithoutLombak(this.id, this.name, this.isPassed, this.CGPA);
+        public StudentsWithoutLombok build() {
+            return new StudentsWithoutLombok(this.id, this.name, this.isPassed, this.CGPA);
         }
 
     }

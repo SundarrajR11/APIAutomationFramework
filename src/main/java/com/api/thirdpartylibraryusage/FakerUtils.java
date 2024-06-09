@@ -1,10 +1,15 @@
-package com.api.thirdpartyAPI;
+package com.api.thirdpartylibraryusage;
 
+import com.api.factoryutils.ObjectFactory;
 import com.github.javafaker.Faker;
-import com.github.javafaker.IdNumber;
 
 import java.util.ArrayList;
 import java.util.List;
+
+/*
+ * Implemented Facade Design Pattern
+ * Service Layer where we can use Third Party library.
+ * Main purpose is if any happened in Third Party library we can directly come and change our needs.*/
 
 public final class FakerUtils {
     private FakerUtils(){}
@@ -30,12 +35,12 @@ public final class FakerUtils {
         return faker.bool().bool();
     }
 
-    public static List<Long> listGenerator(int size) {
-        ArrayList<Long> numList = new ArrayList<>();
-        long numbers= faker.number().randomNumber();
-        for (long i = 0; i < size; i++) {
-            numList.add(numbers+i);
+
+    public static <T> List<T> listGenerator(Class<T> clazz, int size) {
+        List<T> customizedList = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            customizedList.add(ObjectFactory.generateCustomType(clazz));
         }
-        return numList;
+        return customizedList;
     }
 }

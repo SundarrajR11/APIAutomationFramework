@@ -1,41 +1,37 @@
-
-import com.api.requestBodiesPOJOs.StudentsWithLomback;
-import com.api.requestBodiesPOJOs.StudentsWithoutLombak;
-import com.api.requestBuilders.RequestDetailsBuilder;
-import com.api.utilities.RandomProvider;
+import com.api.requestbodiespojos.StudentsWithLombok;
+import com.api.requestbodiespojos.StudentsWithoutLombok;
+import com.api.requestbuilders.RequestDetailsBuilder;
+import static com.api.utilities.RandomProvider.*;
 import org.testng.annotations.Test;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class PostTests {
 
     @Test
     public void postCall(){
 
-        StudentsWithoutLombak reqBody = StudentsWithoutLombak.builder()
-                .setId(RandomProvider.randomId())
-                .setName(RandomProvider.randomFirstName())
+        StudentsWithoutLombok reqBody = StudentsWithoutLombok.builder()
+                .setId(randomId())
+                .setName(randomFirstName())
                 .and()
-                .setCGPA(List.of(1,2,3))
+                .setCGPA(randomNumberList(Integer.class))
                 .with()
-                .setPassed(RandomProvider.randomBoolean())
+                .setPassed(randomBoolean())
                 .build();
         System.out.println(reqBody.toString());
 
         RequestDetailsBuilder.postCalls()
-                .queryParam("StudentsWithoutLombak.builder().getId()")
                 .body(reqBody)
-                .post("/students{id}");
+                .post("/students");
     }
-    @Test
-    public void postCallWithLombakReqBody(){
 
-        StudentsWithLomback reqBody = StudentsWithLomback.builder()
-                .setId(RandomProvider.randomId())
-                .setName(RandomProvider.randomFirstName())
-                .setCGPA(RandomProvider.randomNumberList())
-                .setIsPassed(RandomProvider.randomBoolean())
+    @Test
+    public void postCallWithLombokReqBody(){
+
+        StudentsWithLombok reqBody = StudentsWithLombok.builder()
+                .setId(randomId())
+                .setName(randomFirstName())
+                .setCGPA((randomNumberList(Double.class)))
+                .setIsPassed(randomBoolean())
                 .build();
 
         RequestDetailsBuilder.postCalls()

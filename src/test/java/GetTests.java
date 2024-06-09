@@ -1,4 +1,4 @@
-import com.api.requestBuilders.RequestDetailsBuilder;
+import com.api.requestbuilders.RequestDetailsBuilder;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 

@@ -1,4 +1,4 @@
-package com.api.requestBuilders;
+package com.api.requestbuilders;
 
 import com.api.enums.Econfig;
 import com.api.utilities.ConfigReader;
