@@ -21,7 +21,7 @@ public final class ConfigReader {
     private static final Properties PROPERTIES=new Properties();
 
     static {
-        try(FileInputStream fis =new FileInputStream(FrameworkConstants.getInstance().getConfigFilePath())){
+        try(FileInputStream fis =new FileInputStream(FrameworkConstants.getCONFIG_FILE_PATH())){
 
             PROPERTIES.load(fis);
             PROPERTIES.entrySet().forEach((entry) -> CONFIG.put(
