@@ -24,9 +24,9 @@ public final class ConfigReader {
         try(FileInputStream fis =new FileInputStream(FrameworkConstants.getInstance().getConfigFilePath())){
 
             PROPERTIES.load(fis);
-            PROPERTIES.forEach((key, value) -> CONFIG.put(
-                    String.valueOf(key),
-                    String.valueOf(value)
+            PROPERTIES.entrySet().forEach((entry) -> CONFIG.put(
+                    String.valueOf(entry.getKey()),
+                    String.valueOf(entry.getValue())
             ));
         }
         catch (IOException e){
